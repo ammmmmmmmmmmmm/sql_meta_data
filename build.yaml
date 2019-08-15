@@ -1,0 +1,22 @@
+targets:
+  $default:
+    builders:
+      sql_meta_data|table_builder:
+        enabled: true
+      sql_meta_data|entity_builder:
+        enabled: true
+
+builders:
+  table_builder:
+    import: 'package:sql_meta_data/builder.dart'
+    builder_factories: ['tableBuilder']
+    build_extensions: {'.dart':['.table.dart']}
+    auto_apply: dependents
+    build_to: source
+    runs_before: ['sql_meta_data|entity_builder']
+  entity_builder:
+    import: 'package:sql_meta_data/builder.dart'
+    builder_factories: ['entityBuilder']
+    build_extensions: {'.dart':['.entity.dart']}
+    auto_apply: dependents
+    build_to: source
