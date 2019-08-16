@@ -1,7 +1,7 @@
 
 import 'package:sql_meta_data/sql_meta_data.dart';
 
-@Table(tableName: "user",columns: ["name","age","grade"],types: ["text primary key","int","text"])
+
 class User {
   String name;
   int age;
@@ -9,16 +9,28 @@ class User {
 }
 
 
-@Table(tableName: "school",columns: ["student","teacher"],types: ["text","text"])
+@Table(tableName: "school",indexes: [Index(columns: "teacher",name: "teacher_index")])
 class School {
 
+  @Id()
+  @Column()
+  int id;
+
+  @Column(name: "student")
   String student;
+
+  @Column(name: "teacher")
   String teacher;
 
+  @Column(name: "num")
+  int num;
+
+  @Column()
+  double grads;
 }
 
-@Entity()
-class DB {
 
+@Scanner()
+class DB {
 
 }

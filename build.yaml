@@ -3,8 +3,12 @@ targets:
     builders:
       sql_meta_data|table_builder:
         enabled: true
-      sql_meta_data|entity_builder:
+      sql_meta_data|scanner_builder:
         enabled: true
+      sql_meta_data|column_builder:
+        enabled: false
+      sql_meta_data|id_builder:
+        enabled: false
 
 builders:
   table_builder:
@@ -13,10 +17,22 @@ builders:
     build_extensions: {'.dart':['.table.dart']}
     auto_apply: dependents
     build_to: source
-    runs_before: ['sql_meta_data|entity_builder']
-  entity_builder:
+    runs_before: ['sql_meta_data|scanner_builder']
+  scanner_builder:
     import: 'package:sql_meta_data/builder.dart'
-    builder_factories: ['entityBuilder']
-    build_extensions: {'.dart':['.entity.dart']}
+    builder_factories: ['scannerBuilder']
+    build_extensions: {'.dart':['.scanner.dart']}
     auto_apply: dependents
     build_to: source
+  column_builder:
+    import: 'package:sql_meta_data/builder.dart'
+    builder_factories: ['columnBuilder']
+    build_extensions: {'.dart':['.column.dart']}
+    build_to: source
+    runs_before: ['sql_meta_data|table_builder']
+  id_builder:
+    import: 'package:sql_meta_data/builder.dart'
+    builder_factories: ['IDBuilder']
+    build_extensions: {'.dart':['.primary.dart']}
+    build_to: source
+    runs_before: ['sql_meta_data|table_builder']

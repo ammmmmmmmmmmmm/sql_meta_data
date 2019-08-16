@@ -1,10 +1,11 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// EntityGenerator
+// ScannerGenerator
 // **************************************************************************
 
 const table_schemas = [
-  " CREATE TABLE user (name text primary key,age int,grade text); ",
-  " CREATE TABLE school (student text,teacher text); "
+  " CREATE TABLE school (id INT PRIMARY KEY,student TEXT ,teacher TEXT ,num INT ,grads DOUBLE ); "
 ];
+
+const index_schemas = [" CREATE  INDEX  teacher_index ON school (teacher); "];
